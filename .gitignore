@@ -1,0 +1,23 @@
+# Compiled binaries
+*.exe
+*.out
+a.out
+
+# Object files
+*.o
+*.obj
+
+# Test files
+test
+*.test
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+Thumbs.db
