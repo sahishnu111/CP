@@ -334,7 +334,7 @@ LLCTT
 Existing subsequences:
 
 ```
-2
+4
 ```
 
 If we insert `"C"`:
@@ -346,7 +346,7 @@ LLCCTT
 Total `"LCT"` subsequences:
 
 ```
-4
+8
 ```
 
 ---
