@@ -87,4 +87,6 @@ add_executable(CP
         problemset/task/2422.cpp
         CONTESTtemplate.cpp
         template.cpp
-        "OA/metaOA/Meta SWE OA CTC - 3 CRORE.cpp")
+        "OA/metaOA/Meta SWE OA CTC - 3 CRORE.cpp"
+        "dsa/tuf/BT upside down.cpp"
+        "dsa/tuf/bst iter II.cpp")
