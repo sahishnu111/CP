@@ -9,7 +9,7 @@ long long findBalancedRouting(vector<int>& a, int k) {
     long long s = 0, r = 0, ls = 0; // s: sum, r: result, ls: left-window sum
     int c = 0, l = 0, lc = 0;      // c: odd count, l: left index, lc: left odd count
     unordered_map<long long, int> m;
-
+    
     // (P[-1] - C[-1]) % k = 0
     m[0] = 1;
     vector<int> o = {-1}; // odd indices
@@ -40,7 +40,7 @@ long long findBalancedRouting(vector<int>& a, int k) {
 
         auto it = m.find(v);
         if (it != m.end()) r += it->second;
-
+        
         m[v]++;
     }
     return r;

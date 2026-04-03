@@ -17,7 +17,7 @@ long long maxLCTSubsequence(const string& s) {
 
     long long ans = 0;
 
-    long long gainL,gainT;
+    long long gainL,gainT,maxgainC;
     string t1='L'+s;
     string t2=s+'T';
     gainL=totalLCT(t1)-totalLCT(s);
@@ -27,7 +27,7 @@ long long maxLCTSubsequence(const string& s) {
     // prefixL numbner of L in 0 to i-1
     // suffixT number of T in i to n-1
     // gainC= max(prefixL * suffixT) for all i
-
+    
     long long prefixL=0;
     long long suffixT=0;
     for(char i : s){
@@ -47,12 +47,14 @@ long long maxLCTSubsequence(const string& s) {
         if(i<n){
             if(s[i]=='L') prefixL++;
             else if(s[i]=='T') suffixT--;
-
+            
         }
     }
 
-    string t3=s.substr(0,bestG)+'C'+s.substr(bestG);
-    return max({totalLCT(t1), totalLCT(t2), totalLCT(t3)});
+
+    
+
+
 
 }
 
