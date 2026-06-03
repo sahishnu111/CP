@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-using namespace std;
-
 #define ll long long
 #define pb push_back
 #define all(x) x.begin(), x.end()
@@ -19,36 +17,34 @@ using namespace std;
 #define vvll vector<vll>
 #define mod 1000000007
 #define inf 1e18
+using namespace std;
+
+#define ll long long
+#define pb push_back
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    int n; cin >> n;
+    vector<ll> a[4]; 
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    while (n--) {
+        ll x; 
+        cin >> x;
+        if (x % 6 == 0) a[0].pb(x);
+        else if (x % 2 == 0) a[1].pb(x);
+        else if (x % 3 == 0) a[3].pb(x);
+        else a[2].pb(x);
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    for (auto &v : a)
+        for (ll x : v)
+            cout << x << " ";
+    cout << "\n";
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int test = 1;
-    while (test--) {
-        solve();
-    }
-    return 0;
+
+    int t; cin >> t;
+    while (t--) solve();
 }

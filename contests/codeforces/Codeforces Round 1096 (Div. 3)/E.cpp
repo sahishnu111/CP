@@ -21,32 +21,50 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    int n;
+    cin >> n;
+    vi a(n);
+    ll cubes = 0;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    forn(i, n) {
+        cin >> a[i];
+        cubes += a[i];
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    vi b = a; 
+    sort(all(b));
+
+    ll sx = 0;
+    forn(i, n) {
+        sx += min(a[i], b[i]);
+    }
+
+    ll mv = cubes - sx;
+
+    map<int, int> pos;
+    forn(i, n) {
+        if (pos.find(b[i]) == pos.end()) {
+            pos[b[i]] = i;
+        }
+    }
+
+    int mx = 0;
+    forn(i, n) {
+        int j = pos[a[i]];
+        int dp = (a[i] <= b[i]) + (b[j] <= a[j]);
+        mx = max(mx, dp);
+    }
+
+    ll ans = max(mv, mv - 1 + mx); 
+    cout << ans << endl; 
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int test = 1;
+
+    int test;
+    cin >> test;
     while (test--) {
         solve();
     }

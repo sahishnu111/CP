@@ -21,26 +21,37 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    int n;
+    string s;
+    cin >> n >> s;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
+    vll A(n+1,0),B(n+1,0),C(n+1,0);
 
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    for (int i = 0; i < n; i++) {
+        A[i + 1] = A[i] + (s[i] == 'A');
+        B[i + 1] = B[i] + (s[i] == 'B');
+        C[i + 1] = C[i] + (s[i] == 'C');
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    map<ll,ll> mAB, mAC, mBC;
+    map<pair<ll,ll>, ll> mABC;
+    ll AB=0, AC=0, BC=0, ABC=0;
+
+    for(int i=0;i<=n;i++){
+        ll D_ab=A[i]-B[i];
+        ll D_ac=A[i]-C[i];
+        ll D_bc=B[i]-C[i];
+        
+        AB+=mAB[D_ab]++;
+        BC+=mBC[D_bc]++;
+        AC+=mAC[D_ac]++;
+
+        ABC+=mABC[{D_ab,D_ac}]++;
+    }
+
+    ll t= (ll) n*(n+1)/2;
+    ll inv= AB + AC + BC - 2*ABC;
+    cout << t - inv << endl;
 }
 
 int main() {

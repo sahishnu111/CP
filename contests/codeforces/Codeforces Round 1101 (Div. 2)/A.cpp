@@ -21,32 +21,28 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    int n;
+    cin >> n;
+    vi a(n);
+    forn(i, n) cin >> a[i];
+    sort(all(a));
+    int m = (n % 2 == 0) ? (a[n/2 - 1] + a[n/2]) / 2 : a[n/2];
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    int l = 0;
+    int r = 0;
+    forn(i, n) {
+        if (a[i] < m) l++;
+        if (a[i] > m) r++;
     }
     
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    cout << max(l, r) << endl;
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int test = 1;
+    cin >> test;
     while (test--) {
         solve();
     }

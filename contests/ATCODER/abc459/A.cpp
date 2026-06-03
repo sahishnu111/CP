@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define ll long long
 #define pb push_back
 #define all(x) x.begin(), x.end()
@@ -21,26 +20,14 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
+    int n;
+    cin >> n;
+
+    string H="HelloWorld";
+
+    cout<< H.substr(0,n-1) + H.substr(n,10-n) << endl;
     
     
-    vector<vector<int>> dp(n, vector<int>(2, 0));
-
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
-    }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
 }
 
 int main() {

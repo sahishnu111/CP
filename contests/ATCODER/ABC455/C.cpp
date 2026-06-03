@@ -21,26 +21,35 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    int n,m;
+    cin >> n >> m;
+    int sum = 0;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
+    map<int , ll> cnt;
 
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    for(int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        cnt[x]+= x;
+        sum+=x;
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    vector <ll> st;
+    for(const auto& pair : cnt) {
+        st.push_back(pair.second);
+    }
+
+    sort(all(st), greater<ll>());
+
+    int mn = min((int)st.size(), k);
+    ll t=0;
+    for(int i=0;i<mn;i++){
+         t+=st[i];
+    }
+
+    cout << sum-t << endl;    
+    
+    
 }
 
 int main() {

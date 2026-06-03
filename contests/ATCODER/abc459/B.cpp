@@ -21,26 +21,34 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
+    // hashmap 
+    int n;
+    cin >> n;
+    vector<string> words(n);
+    forn(i, n) cin >> words[i];
     
+    map<char,int> f={
+        {'a',2},{'b',2},{'c',2},
+        {'d',3},{'e',3},{'f',3},
+        {'g',4},{'h',4},{'i',4},
+        {'j',5},{'k',5},{'l',5},
+        {'m',6},{'n',6},{'o',6},
+        {'p',7},{'q',7},{'r',7},{'s',7},
+        {'t',8},{'u',8},{'v',8},
+        {'w',9},{'x',9},{'y',9},{'z',9}
+    };
+
     
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    string ans;
+    for(const auto &word: words){
+        char c = word[0];
+        ans+= to_string(f[c]);
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    cout << ans << endl;
+    
+    
 }
 
 int main() {

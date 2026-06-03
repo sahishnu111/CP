@@ -21,32 +21,33 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
+    int n;
+    cin >> n;
+    vi a(n);
+    forn(i, n) cin >> a[i];
+
+    int cnt0 = count(all(a), 0);
+    int cnt1 = count(all(a), 1);
+    int cnt2 = count(all(a), 2);
+    int ans=cnt0;
+
+
+    int pair1and2 = min(cnt1, cnt2);
+    ans+= pair1and2;
+    cnt1-= pair1and2;
+    cnt2-= pair1and2;
     
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    ans+= cnt1/3;
+    ans+= cnt2/3;
+    cout << ans << endl;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
-    }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int test = 1;
+    cin >> test;
     while (test--) {
         solve();
     }

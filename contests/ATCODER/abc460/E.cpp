@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define ll long long
 #define pb push_back
 #define all(x) x.begin(), x.end()
@@ -17,36 +16,46 @@ using namespace std;
 #define vll vector<ll>
 #define vvi vector<vi>
 #define vvll vector<vll>
-#define mod 1000000007
+#define mod 998244353
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    ll m,n;
+    cin>>n>>m;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
+    ll ans=0;
+    ll p1=1;
+    ll KM=0;
 
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
+    int l = to_string(n).size();
 
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
+    for(int i=1;i<=l;i++){
+        KM = (KM*10 + 9) % m;
+        ll mny = p1;
+        ll mxy = (i==19) ? n: min(n, p1*10-1);
+        ll cnty = max(0LL, mxy-mny+1);
 
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+
+
+        ll r = m / std::gcd(m,KM); 
+        ll cntx = n/r;
+        cnty %= mod;
+        cntx %= mod;
+
+
+
+        ans = (ans + cntx*cnty) % mod;
+        if (i<19) p1 *= 10;
     }
-    
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    cout<<ans<<endl;
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int test = 1;
+    cin>>test;
     while (test--) {
         solve();
     }

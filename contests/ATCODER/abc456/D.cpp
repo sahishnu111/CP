@@ -17,30 +17,28 @@ using namespace std;
 #define vll vector<ll>
 #define vvi vector<vi>
 #define vvll vector<vll>
-#define mod 1000000007
+#define mod 998244353 
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
+    string s;
+    cin >> s;
+    int n = s.size();
     
+    ll dpA = 0, dpB = 0, dpC = 0;
+
+    for(int i = 0; i < n; i++){
+        if(s[i] == 'a'){
+            dpA = (dpA+1 + dpB + dpC) % mod;
+        } else if(s[i] == 'b'){
+            dpB = (dpB+1 + dpA + dpC) % mod;
+        } else if(s[i] == 'c'){
+            dpC = (dpC+1 + dpA + dpB) % mod;
+        }
+    }   
     
-    vector<vector<int>> dp(n, vector<int>(2, 0));
-
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
-    }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    ll ans = (dpA + dpB + dpC) % mod;
+    cout << ans << endl;
 }
 
 int main() {

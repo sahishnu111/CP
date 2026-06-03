@@ -21,26 +21,17 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
+    // Your code here
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    //removing all leading consecutive os
+    int i = 0;
+    while(i < n && s[i] == 'o') { i++;}
+    s.erase(0, i);
+    cout << s << endl;
 
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
-    }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
 }
 
 int main() {

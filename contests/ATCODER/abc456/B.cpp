@@ -21,26 +21,24 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
-
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    double ans=0;
+    vi die={4,5,6};
+    vvi cnt(3,vi(7,0));
+    forn(i,3){
+        forn(j,6){
+            int x;
+            cin >> x;
+            cnt[i][x]++;
+        }
     }
-    
+    double p=0;
+    do{
+        p+=cnt[0][die[0]]*cnt[1][die[1]]*cnt[2][die[2]];
 
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
+    }while(next_permutation(die.begin(),die.end())); 
+
+    ans=p/216.0;
+    cout<<fixed<<setprecision(6)<<ans<<endl;
 }
 
 int main() {

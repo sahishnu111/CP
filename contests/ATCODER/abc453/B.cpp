@@ -21,26 +21,19 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
-    
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
-
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    int time;
+    int x;
+    cin >> time >> x;
+    vll a(time+1);
+    forn(i, time+1) cin >> a[i];
+    int prev = a[0];
+    cout << 0 << " " << a[0] << "\n";
+    for(int i = 1; i <= time; i++){
+        if(abs(a[i] - prev) >= x){
+            cout << i << " " << a[i] << "\n";
+            prev = a[i];
+        }
     }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
 }
 
 int main() {

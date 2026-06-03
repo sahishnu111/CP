@@ -21,32 +21,27 @@ using namespace std;
 #define inf 1e18
 
 void solve() {
-    string S;
-    cin >> S;
-    int n = S.size();
+    ll x1,y1,r1,x2,y2,r2;
+    cin>>x1>>y1>>r1>>x2>>y2>>r2;
+
+    ll d = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
+    ll lower = (r1-r2)*(r1-r2);
+    ll upper = (r1+r2)*(r1+r2);
     
-    
-    vector<vector<int>> dp(n, vector<int>(2, 0));
-
-  
-    dp[0][0] = (islower(S[0]) ? 1 : 0); 
-
-    dp[0][1] = (isupper(S[0]) ? 1 : 0);
-
-    for(int i = 1; i < n; i++) {
-        dp[i][0] = dp[i-1][0] + (islower(S[i]) ? 1 : 0);
-
-        dp[i][1] = min(dp[i-1][0], dp[i-1][1]) + (isupper(S[i]) ? 1 : 0);
+    if(d < lower){
+        cout<<"No"<<endl;
+    }else if(d >= lower && d <= upper){ 
+        cout<<"Yes"<<endl;
+    }else if(d > upper){
+        cout<<"No"<<endl;
     }
-    
-
-    cout << min(dp[n-1][0], dp[n-1][1]) << endl;
 }
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int test = 1;
+    cin>>test;
     while (test--) {
         solve();
     }
